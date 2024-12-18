@@ -6,9 +6,7 @@ import (
 	"github.com/xuri/excelize/v2"
 )
 
-func main() {
-	Pull()
-}
+func main() {}
 func ReadExcel() {
 	f, err := excelize.OpenFile("2024智算组件故障统计分析.xls")
 	if err != nil {

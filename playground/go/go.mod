@@ -6,7 +6,6 @@ replace github.com/Chara-X/github => ../../../github
 
 require (
 	github.com/Chara-X/flate v0.0.0-00010101000000-000000000000
-	github.com/Chara-X/github v0.0.0-00010101000000-000000000000
 	github.com/Chara-X/tunnel v0.0.0-00010101000000-000000000000
 	github.com/agiledragon/gomonkey/v2 v2.12.0
 	github.com/xuri/excelize/v2 v2.9.0

@@ -1,15 +1,28 @@
-use std::fmt::{Debug, Display};
+use std::any::Any;
 
-#[derive(core::clone::Clone, core::default::Default, Debug)]
-struct SomeOptions {
-    foo: i32,
-    bar: f32,
-    baz: String,
+trait MyTrait {
+    fn do_something(&self);
 }
-trait SomeTrait {
-    fn some_method(&self) {}
+
+struct MyStruct {
+    value: i32,
 }
-fn compare<T: Eq>(x: T, y: T) -> bool {
-    x == y
+
+impl MyTrait for MyStruct {
+    fn do_something(&self) {
+        println!("Value: {}", self.value);
+    }
 }
-fn main() {}
+
+fn main() {
+    use std::any::{Any, TypeId};
+
+    let boxed: Box<dyn Any> = Box::new(3_i32);
+    // You're more likely to want this:
+    let actual_id = (&*boxed).type_id();
+    // ... than this:
+    let boxed_id = boxed.type_id();
+
+    assert_eq!(actual_id, TypeId::of::<i32>());
+    assert_eq!(boxed_id, TypeId::of::<Box<dyn Any>>());
+}
