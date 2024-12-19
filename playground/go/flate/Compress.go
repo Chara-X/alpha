@@ -1,4 +1,4 @@
-package main
+package flate
 
 func Compress(b []byte) []byte {
 	var output = []byte{}

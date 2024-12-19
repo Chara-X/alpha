@@ -5,8 +5,6 @@ go 1.23.1
 replace github.com/Chara-X/github => ../../../github
 
 require (
-	github.com/Chara-X/flate v0.0.0-00010101000000-000000000000
-	github.com/Chara-X/tunnel v0.0.0-00010101000000-000000000000
 	github.com/agiledragon/gomonkey/v2 v2.12.0
 	github.com/xuri/excelize/v2 v2.9.0
 	golang.org/x/crypto v0.28.0
@@ -17,7 +15,6 @@ require (
 )
 
 require (
-	github.com/Chara-X/binary v0.0.0-00010101000000-000000000000 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect

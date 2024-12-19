@@ -1,4 +1,4 @@
-package main
+package flate
 
 func Decompress(input []byte) []byte {
 	var output = []byte{}

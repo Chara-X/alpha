@@ -4,25 +4,23 @@ trait MyTrait {
     fn do_something(&self);
 }
 
-struct MyStruct {
+struct MyStruct<'a> {
     value: i32,
+    text: &'a str,
 }
 
-impl MyTrait for MyStruct {
+impl<'a> MyTrait for MyStruct<'a> {
     fn do_something(&self) {
+        self.do_something();
         println!("Value: {}", self.value);
     }
 }
-
 fn main() {
-    use std::any::{Any, TypeId};
-
-    let boxed: Box<dyn Any> = Box::new(3_i32);
-    // You're more likely to want this:
-    let actual_id = (&*boxed).type_id();
-    // ... than this:
-    let boxed_id = boxed.type_id();
-
-    assert_eq!(actual_id, TypeId::of::<i32>());
-    assert_eq!(boxed_id, TypeId::of::<Box<dyn Any>>());
+    let s = &MyStruct {
+        value: 42,
+        text: "",
+    };
+    let t = s as &dyn Any;
+    let t = t.downcast_ref::<String>().unwrap();
+    let s: &'static str = "I have a static lifetime.";
 }

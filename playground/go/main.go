@@ -1,56 +1,46 @@
 package main
 
 import (
-	"fmt"
+	"log"
+	"net/http"
 
-	"github.com/xuri/excelize/v2"
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
-func main() {}
-func ReadExcel() {
-	f, err := excelize.OpenFile("2024智算组件故障统计分析.xls")
-	if err != nil {
-		panic(err)
-	}
-	defer func() {
-		// Close the spreadsheet.
-		if err := f.Close(); err != nil {
-			panic(err)
-		}
-	}()
-	// Get all the rows in the Sheet1.
-	rows, err := f.GetRows("导出结果")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	for _, row := range rows {
-		for _, colCell := range row {
-			fmt.Print(colCell, "\t")
-		}
-		fmt.Println()
-	}
+type metrics struct {
+	cpuTemp    prometheus.Gauge
+	hdFailures *prometheus.CounterVec
 }
-func WriteEXCEL() {
-	f := excelize.NewFile()
-	defer func() {
-		if err := f.Close(); err != nil {
-			fmt.Println(err)
-		}
-	}()
-	// Create a new sheet.
-	index, err := f.NewSheet("Sheet2")
-	if err != nil {
-		fmt.Println(err)
-		return
+
+func NewMetrics(reg prometheus.Registerer) *metrics {
+	m := &metrics{
+		cpuTemp: prometheus.NewGauge(prometheus.GaugeOpts{
+			Name: "cpu_temperature_celsius",
+			Help: "Current temperature of the CPU.",
+		}),
+		hdFailures: prometheus.NewCounterVec(
+			prometheus.CounterOpts{
+				Name: "hd_errors_total",
+				Help: "Number of hard-disk errors.",
+			},
+			[]string{"device"},
+		),
 	}
-	// Set value of a cell.
-	f.SetCellValue("Sheet2", "A2", "Hello world.")
-	f.SetCellValue("Sheet1", "B2", 100)
-	// Set active sheet of the workbook.
-	f.SetActiveSheet(index)
-	// Save spreadsheet by the given path.
-	if err := f.SaveAs("Book1.xlsx"); err != nil {
-		fmt.Println(err)
-	}
+	reg.MustRegister(m.cpuTemp)
+	reg.MustRegister(m.hdFailures)
+	return m
+}
+func main() {
+	// Create a non-global registry.
+	reg := prometheus.NewRegistry()
+	// Create new metrics and register them using the custom registry.
+	m := NewMetrics(reg)
+	// Set values for the new created metrics.
+	m.cpuTemp.Set(65.3)
+	m.hdFailures.With(prometheus.Labels{"device": "/dev/sda"}).Inc()
+	// Expose metrics and custom registry via an HTTP server
+	// using the HandleFor function. "/metrics" is the usual endpoint for that.
+	http.Handle("/metrics", promhttp.HandlerFor(reg, promhttp.HandlerOpts{Registry: reg}))
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
