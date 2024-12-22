@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"sync"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
@@ -36,6 +37,8 @@ func main() {
 	reg := prometheus.NewRegistry()
 	// Create new metrics and register them using the custom registry.
 	m := NewMetrics(reg)
+	var x = sync.Mutex{}
+	x.Unlock()
 	// Set values for the new created metrics.
 	m.cpuTemp.Set(65.3)
 	m.hdFailures.With(prometheus.Labels{"device": "/dev/sda"}).Inc()
