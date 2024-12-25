@@ -1,19 +1,24 @@
 package main
 
 import (
-	"bytes"
-	"encoding/csv"
-	"fmt"
 	"log"
-	"os"
+
+	"github.com/gizak/termui/v3"
+	"github.com/gizak/termui/v3/widgets"
 )
 
 func main() {
-	var in, _ = os.ReadFile("test.csv")
-	r := csv.NewReader(bytes.NewReader(in))
-	records, err := r.ReadAll()
-	if err != nil {
-		log.Fatal(err)
+	if err := termui.Init(); err != nil {
+		log.Fatalf("failed to initialize termui: %v", err)
 	}
-	fmt.Print(records)
+	defer termui.Close()
+	var p = widgets.NewParagraph()
+	p.Text = "Hello World!"
+	p.SetRect(0, 0, 25, 5)
+	termui.Render(p)
+	for e := range termui.PollEvents() {
+		if e.Type == termui.KeyboardEvent {
+			break
+		}
+	}
 }
