@@ -32,6 +32,8 @@ func NewMetrics(reg prometheus.Registerer) *metrics {
 	reg.MustRegister(m.hdFailures)
 	return m
 }
+
+// /usr/bin/python3.6
 func main() {
 	// Create a non-global registry.
 	reg := prometheus.NewRegistry()
