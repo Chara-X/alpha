@@ -1,5 +1,7 @@
-def say(msg):
-    print(msg)
+# from testcase import HealthCheckCompleted 
+import requests
 
+# HealthCheckCompleted.health_check_completed()
+status = requests.get("https://www.google.com")
 
-say("Hello, World!")
+print(status.status_code)
