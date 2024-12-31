@@ -2,12 +2,12 @@
 -- Create table.
 CREATE TABLE IF NOT EXISTS
     "tests" (
+        "标识" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
         "目标" TEXT NOT NULL,
         "类型" TEXT NOT NULL,
         "行为" TEXT NOT NULL,
         "断言" TEXT,
-        "是否自动化" INTEGER DEFAULT 0,
-        PRIMARY KEY ("目标", "类型", "行为")
+        "是否自动化" INTEGER DEFAULT 0
     );
 
 -- Prepare tests.
@@ -113,3 +113,10 @@ VALUES
     ',
         0
     );
+
+--Rows count.
+
+SELECT
+    COUNT(*)
+FROM
+    "tests";

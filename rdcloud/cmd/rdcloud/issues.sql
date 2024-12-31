@@ -16,12 +16,10 @@ CREATE TABLE IF NOT EXISTS
         "发现活动" TEXT NOT NULL,
         "版本所处阶段" TEXT NOT NULL,
         "缺陷等级" TEXT NOT NULL,
-        "研究结论" TEXT NOT NULL,
-        "测试目标" TEXT,
-        "测试类型" TEXT,
-        "测试行为" TEXT,
+        "研究结论" TEXT,
+        "测试标识" INTEGER,
         PRIMARY KEY ("标识"),
-        FOREIGN KEY ("测试目标", "测试类型", "测试行为") REFERENCES "tests" ("目标", "类型", "行为") ON DELETE SET NULL
+        FOREIGN KEY ("测试标识") REFERENCES "tests" ("标识")
     );
 
 --Rows count.
@@ -29,11 +27,6 @@ SELECT
     COUNT(*)
 FROM
     "issues";
-
-SELECT
-    COUNT(*)
-FROM
-    "tests";
 
 -- Unclosed issues.
 SELECT

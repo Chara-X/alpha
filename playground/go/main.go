@@ -112,10 +112,6 @@ func ExamplePlaywright() {
 		Visible: &visible,
 	})
 	fmt.Println(x.AriaSnapshot())
-	x.Click()
-	x.Highlight()
-	x.SetChecked(true)
-	x.Uncheck()
 	if visible {
 		fmt.Println("Test 2 passed: 'Installation' heading is visible")
 	} else {
