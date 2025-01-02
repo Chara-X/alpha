@@ -28,13 +28,13 @@ SELECT
 FROM
     "issues";
 
--- Unclosed issues.
+-- Valid issues.
 SELECT
     *
 FROM
     "issues"
 WHERE
-    "状态" NOT IN ('已关闭', '已确认重复', '已确认拒绝', '已取消');
+    "状态" NOT IN ('已确认重复', '已确认拒绝', '已取消');
 
 -- Uncovered Issues.
 SELECT
