@@ -4,8 +4,6 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-rand = "0.8.5"
-serde_json = "1.0"
-serde = { version = "1.0", features = ["derive"] }
-syn = "2.0"
-quote = "1.0"
+# regex = "0.1.41"
+reg = { git = "https://github.com/rust-lang/regex.git", package = "regex" }
+tokio = { version = "1", features = ["full"] }

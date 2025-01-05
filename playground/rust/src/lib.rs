@@ -1,14 +1,14 @@
-pub use cal::add;
-pub mod cal;
-pub fn hello() {
-    add(1, 2);
+pub fn add(left: u64, right: u64) -> u64 {
+    left + right
 }
-/// # Examples:
-/// ```
-/// use rust::test;
-/// let v = vec![1, 2, 3];
-/// assert_eq!(test(v.into_iter()), 3);
-/// ```
-pub fn test<T: Iterator>(it: T) -> usize {
-    it.count()
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn it_works() {
+        let result = add(2, 2);
+        assert_eq!(result, 4);
+    }
 }

@@ -1,19 +1,4 @@
-import { chromium, devices } from 'playwright';
-import assert from 'assert';
+import { map, filter, reduce } from 'lodash';
+const numbers = [1, 2, 3, 4];
 
-(async () => {
-    // Setup
-    const browser = await chromium.launch();
-    const context = await browser.newContext(devices['iPhone 11']);
-    const page = await context.newPage();
-
-    // The actual interesting bit
-    await context.route('**.jpg', route => route.abort());
-    await page.goto('https://example.com/');
-
-    assert(await page.title() === 'Example Domain'); // 👎 not a Web First assertion
-
-    // Teardown
-    await context.close();
-    await browser.close();
-})();
+const doubled = map(numbers, (num) => num * 2); // [2, 4, 6, 8]

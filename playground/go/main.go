@@ -9,43 +9,30 @@ import (
 )
 
 func main() {
-	ExamplePlaywright()
-}
-func ExampleHackNews() {
-	{
-		pw, err := playwright.Run()
-		if err != nil {
-			log.Fatalf("could not start playwright: %v", err)
-		}
-		browser, err := pw.Chromium.Launch()
-		if err != nil {
-			log.Fatalf("could not launch browser: %v", err)
-		}
-		page, err := browser.NewPage()
-		if err != nil {
-			log.Fatalf("could not create page: %v", err)
-		}
-		if _, err = page.Goto("https://news.ycombinator.com"); err != nil {
-			log.Fatalf("could not goto: %v", err)
-		}
-		entries, err := page.Locator(".athing").All()
-		if err != nil {
-			log.Fatalf("could not get entries: %v", err)
-		}
-		for i, entry := range entries {
-			title, err := entry.Locator("td.title > span > a").TextContent()
-			if err != nil {
-				log.Fatalf("could not get text content: %v", err)
-			}
-			fmt.Printf("%d: %s\n", i+1, title)
-		}
-		if err = browser.Close(); err != nil {
-			log.Fatalf("could not close browser: %v", err)
-		}
-		if err = pw.Stop(); err != nil {
-			log.Fatalf("could not stop Playwright: %v", err)
-		}
-	}
+	var pw, _ = playwright.Run()
+	defer pw.Stop()
+	var browser, _ = pw.Chromium.Launch(playwright.BrowserTypeLaunchOptions{
+		Headless: playwright.Bool(true),
+	})
+	defer browser.Close()
+	var page, _ = browser.NewPage(playwright.BrowserNewPageOptions{
+		Permissions: []string{},
+		StorageState: &playwright.OptionalStorageState{
+			Cookies: []playwright.OptionalCookie{},
+		},
+		ExtraHttpHeaders: map[string]string{},
+		Geolocation:      &playwright.Geolocation{},
+		Offline:          playwright.Bool(false),
+	})
+	defer page.Close()
+	page.Goto("https://www.w3schools.com/html/html_iframe.asp")
+	// var getStarted = page.Locator(".getStarted_Sjon")
+	// fmt.Println(getStarted.Evaluate("(x,y) => y.innerText",getStarted))
+	var ctx = page.Context()
+	ctx.StorageState()
+	playwright.Install()
+	ctx.Request().StorageState("state.json")
+
 }
 func ExamplePlaywright() {
 	// Start Playwright
@@ -116,35 +103,5 @@ func ExamplePlaywright() {
 		fmt.Println("Test 2 passed: 'Installation' heading is visible")
 	} else {
 		fmt.Println("Test 2 failed: 'Installation' heading is not visible")
-	}
-}
-func ExamplePakWheels() {
-	pw, _ := playwright.Run()
-	defer pw.Stop()
-	browser, _ := pw.Chromium.Launch(playwright.BrowserTypeLaunchOptions{
-		Headless: playwright.Bool(true),
-	})
-	defer browser.Close()
-	page, _ := browser.NewPage()
-	page.Goto("https://www.pakwheels.com/")
-	searchBox := page.Locator("input[name='home-query']")
-	btn := page.Locator("button[id='home-search-btn']")
-	searchBox.Fill("Toyota Corolla")
-	btn.Click()
-	if err := page.WaitForLoadState(); err != nil {
-		panic(err)
-	}
-	classifiedListings := page.Locator("li.classified-listing")
-	count, _ := classifiedListings.Count()
-	fmt.Println(count)
-	for i := 0; i < count; i++ {
-		listing := classifiedListings.Nth(i)
-		fmt.Println(listing.InnerText())
-		_, err := listing.Screenshot(playwright.LocatorScreenshotOptions{
-			Path: playwright.String(fmt.Sprintf("capture/listing-%d.png", i+1)),
-		})
-		if err != nil {
-			panic(err)
-		}
 	}
 }
