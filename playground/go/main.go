@@ -30,9 +30,7 @@ func main() {
 	// fmt.Println(getStarted.Evaluate("(x,y) => y.innerText",getStarted))
 	var ctx = page.Context()
 	ctx.StorageState()
-	playwright.Install()
 	ctx.Request().StorageState("state.json")
-
 }
 func ExamplePlaywright() {
 	// Start Playwright
