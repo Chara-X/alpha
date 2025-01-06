@@ -30,6 +30,10 @@ func main() {
 	// fmt.Println(getStarted.Evaluate("(x,y) => y.innerText",getStarted))
 	var ctx = page.Context()
 	ctx.StorageState()
+	page.GetByRole("", playwright.PageGetByRoleOptions{})
+	page.GetByText("")
+	var asserts = playwright.NewPlaywrightAssertions()
+	asserts.Locator(page.Locator("")).ToHaveText("")
 	ctx.Request().StorageState("state.json")
 }
 func ExamplePlaywright() {
