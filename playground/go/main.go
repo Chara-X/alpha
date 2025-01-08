@@ -107,3 +107,13 @@ func ExamplePlaywright() {
 		fmt.Println("Test 2 failed: 'Installation' heading is not visible")
 	}
 }
+
+/*
+curl -i -X POST "https://swr:6000/swr/v1/tenants/admin/images/upload?name=image/birensupa-pytorch-llama2_70b&version=v7.24.40.06" -F 'file=@birensupa-pytorch-llama2_70b-v7.24.40.06.tar'
+
+curl -i -k -X POST https://10.166.209.110:443/opapi/wsm/v1/apts/dataset \
+  -H "Content-Type: application/zip" \
+  -F "file=@/home/pict/ntq/wudao.zip"
+
+curl -i -k -X POST https://10.166.209.110:443/opapi/wsm/v1/apts/dataset/bind -d '{"datasetName":"wudao22","pvc":"llama70b","namespace":"test70b","datasetFileName":"wudao.zip"}'
+*/
