@@ -1,4 +1,16 @@
-import { map, filter, reduce } from 'lodash';
-const numbers = [1, 2, 3, 4];
+function resolveAfter2Seconds() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve('resolved');
+        }, 2000);
+    });
+}
 
-const doubled = map(numbers, (num) => num * 2); // [2, 4, 6, 8]
+async function asyncCall() {
+    console.log('calling');
+    const result = await resolveAfter2Seconds();
+    console.log(result);
+    // Expected output: "resolved"
+}
+
+asyncCall();
