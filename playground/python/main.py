@@ -1,7 +1,26 @@
-# from testcase import HealthCheckCompleted 
-import requests
+class MyClass:
+    """A simple example class"""
 
-# HealthCheckCompleted.health_check_completed()
-status = requests.get("https://www.google.com")
+    i = 12345
 
-print(status.status_code)
+    def ini(self):
+        x.i = 54321
+        self.name = "Chara-X"
+        self.age = 20
+
+    def new(name, age):
+        x = MyClass()
+        x.name = name
+        x.age = age
+        return x
+
+    def f(self):
+        """This function returns a string "hello world"""
+        print(self.i)
+        return "hello world"
+
+
+x = MyClass()
+print(x.i)
+print(x.f())
+print(x.__doc__)

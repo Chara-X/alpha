@@ -1,12 +1,26 @@
+use tokio::{
+    spawn,
+    time::{sleep, Duration},
+};
+
+async fn say_hello() {
+    // Wait for a while before printing to make it a more interesting race.
+    sleep(Duration::from_millis(100)).await;
+    println!("hello");
+}
+
+async fn say_world() {
+    sleep(Duration::from_millis(100)).await;
+    println!("world");
+}
+
 #[tokio::main]
 async fn main() {
-    println!("Hello, world!");
-    let a = 1;
-    let b = 2;
-    let x = add(a, b);
-}
-// An async function, but it doesn't need to wait for anything.
-async fn add(a: u32, b: u32) -> u32 {
-    println!("Adding {} and {}", a, b);
-    a + b
+    let handle1 = spawn(say_hello());
+    let handle2 = spawn(say_world());
+
+    let _ = handle1.await;
+    let _ = handle2.await;
+
+    println!("!");
 }
