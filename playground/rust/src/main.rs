@@ -1,26 +1,24 @@
-use tokio::{
-    spawn,
-    time::{sleep, Duration},
-};
+use serde_json::{json, Result, Value};
 
-async fn say_hello() {
-    // Wait for a while before printing to make it a more interesting race.
-    sleep(Duration::from_millis(100)).await;
-    println!("hello");
-}
+fn main() {}
 
-async fn say_world() {
-    sleep(Duration::from_millis(100)).await;
-    println!("world");
-}
+fn untyped_example() -> Result<()> {
+    // Some JSON input data as a &str. Maybe this comes from the user.
+    let data = r#"
+        {
+            "name": "John Doe",
+            "age": 43,
+            "phones": [
+                "+44 1234567",
+                "+44 2345678"
+            ]
+        }"#;
 
-#[tokio::main]
-async fn main() {
-    let handle1 = spawn(say_hello());
-    let handle2 = spawn(say_world());
+    // Parse the string of data into serde_json::Value.
+    let v: Value = serde_json::from_str(data)?;
 
-    let _ = handle1.await;
-    let _ = handle2.await;
+    // Access parts of the data by indexing with square brackets.
+    println!("Please call {} at the number {}", v["name"], v["phones"][0]);
 
-    println!("!");
+    Ok(())
 }

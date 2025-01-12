@@ -36,6 +36,15 @@ func main() {
 	asserts.Locator(page.Locator("")).ToHaveText("")
 	ctx.Request().StorageState("state.json")
 }
+
+type User struct {
+	Id int
+}
+
+func (u *User) Walk() {
+}
+
+// [os.File.Read]
 func ExamplePlaywright() {
 	// Start Playwright
 	pw, err := playwright.Run()
