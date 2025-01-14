@@ -1,0 +1,596 @@
+@hostname = https://10.166.209.110
+@port = 443
+@host = {{hostname}}:{{port}}
+### Create health check task
+POST {{host}}/opapi/wsm/v1/apts/healthcheck HTTP/1.1
+
+{
+  "object": "cluster",
+  "checkSubInfo": {
+    "gpuConsistencyCheck": [
+      "gpuharddropnum"
+    ],
+    "rdmaConsistencyCheck": [
+      "rdmaportnum"
+    ]
+  },
+  "healthCheckCfg": {
+    "rdmaNums": 10,
+    "gpuNums": 10
+  }
+}
+### Get health check parameter
+GET {{host}}/opapi/wsm/v1/apts/healthcheckcfg HTTP/1.1
+
+
+# Response:
+{
+  "gpuNums": 10,
+  "rdmaNums": 10,
+  "gpuDriverVer": {
+    "brVendor": {
+      "Biren106M": [
+        "1.5.3.1001"
+      ]
+    }
+  },
+  "rdmaParamDriverVer": "5.8-1.1.2",
+  "rdmaStorageDriverVer": "5.8-1.1.2",
+  "rdmaParamFwVer": "28.43.2026",
+  "rdmaStorageFwVer": "22.35.3006",
+  "osVer": "",
+  "serverFwVer": "",
+  "bmcVer": "",
+  "biosVer": "",
+  "epldVer": "",
+  "gpuDrivers": {
+    "BIREN": {
+      "Biren106M": [
+        "1.5.3.1001"
+      ]
+    }
+  },
+  "rdmaParaFwVers": [
+    "28.43.2026"
+  ],
+  "rdmaParaDriverVers": [
+    "5.8-1.1.2"
+  ],
+  "rdmaStoreFwVers": [
+    "22.35.3006",
+    "22.40.1000"
+  ],
+  "rdmaStoreDriverVers": [
+    "5.8-1.1.2"
+  ]
+}
+
+### Get health check result
+GET {{host}}/opapi/wsm/v1/apts/healthcheck HTTP/1.1
+
+
+# Response:
+{
+  "result": [
+    {
+      "object": "cluster",
+      "objectId": [],
+      "checkType": "gpuAvailability",
+      "checkSubItem": "gpustatus",
+      "subResult": "healthy",
+      "checkDetail": "检查通过: 共检查 5 个节点， 40 个GPU。\n",
+      "checkDetailEn": "Check pass: 5 nodes and 40 GPUs are checked. \n",
+      "status": "completed",
+      "startTime": "2025-01-14T14:07:39+08:00",
+      "endTime": "2025-01-14T14:07:39+08:00",
+      "showDetail": false
+    }
+  ],
+  "status": "completed",
+  "startTime": "2025-01-14T14:07:39+08:00",
+  "endTime": "2025-01-14T14:07:39+08:00",
+  "vendor": "BIREN",
+  "nodeNum": 5,
+  "gpuNum": 40,
+  "paraNum": null,
+  "storeNum": null
+}
+### Create gpu inspection task
+POST {{host}}/opapi/wsm/v1/apts/gpuinspectiontask HTTP/1.1
+
+{
+  "diag_configs": [
+    {
+      "vendor": "biren",
+      "diag_param": "",
+      "diag_level": "short"
+    }
+  ],
+  "inspect_count": 1,
+  "inspect_type": "GPU",
+  "mos": [],
+  "notes": []
+}
+### Delete gpu inspection task
+DELETE {{host}}/opapi/wsm/v1/apts/gpuinspectiontask HTTP/1.1
+### Get gpu inspection result
+GET {{host}}/opapi/wsm/v1/apts/gpuinspectiontask HTTP/1.1
+
+
+# Response:
+{
+  "diag_created": "2025-01-14T16:20:10+08:00",
+  "diag_gpu_outputs": [
+    {
+      "diag_exec_errmsg": "GPU is occupied",
+      "diag_fail_count": 1,
+      "gpuUUID": "NB4B44LQ069",
+      "gpu_result_summary": {},
+      "model": "Biren106M",
+      "node_name": "cluster-cim2-minion-0-3",
+      "result": "Undetected",
+      "vendor": "BIREN"
+    },
+    {
+      "diag_exec_errmsg": "GPU is occupied",
+      "diag_fail_count": 1,
+      "gpuUUID": "NB4B44L6041",
+      "gpu_result_summary": {},
+      "model": "Biren106M",
+      "node_name": "cluster-cim2-minion-0-3",
+      "result": "Undetected",
+      "vendor": "BIREN"
+    },
+    {
+      "diag_exec_errmsg": "GPU is occupied",
+      "diag_fail_count": 1,
+      "gpuUUID": "NB4B44LT063",
+      "gpu_result_summary": {},
+      "model": "Biren106M",
+      "node_name": "cluster-cim2-minion-0-3",
+      "result": "Undetected",
+      "vendor": "BIREN"
+    },
+    {
+      "diag_exec_errmsg": "GPU is occupied",
+      "diag_fail_count": 1,
+      "gpuUUID": "NB4B45MD050",
+      "gpu_result_summary": {},
+      "model": "Biren106M",
+      "node_name": "cluster-cim2-minion-0-3",
+      "result": "Undetected",
+      "vendor": "BIREN"
+    },
+    {
+      "diag_exec_errmsg": "GPU is occupied",
+      "diag_fail_count": 1,
+      "gpuUUID": "NB4B42LU066",
+      "gpu_result_summary": {},
+      "model": "Biren106M",
+      "node_name": "cluster-cim2-minion-0-2",
+      "result": "Undetected",
+      "vendor": "BIREN"
+    },
+    {
+      "diag_exec_errmsg": "GPU is occupied",
+      "diag_fail_count": 1,
+      "gpuUUID": "NB4B44LD067",
+      "gpu_result_summary": {},
+      "model": "Biren106M",
+      "node_name": "cluster-cim2-minion-0-2",
+      "result": "Undetected",
+      "vendor": "BIREN"
+    },
+    {
+      "diag_exec_errmsg": "GPU is occupied",
+      "diag_fail_count": 1,
+      "gpuUUID": "NB4B42LF069",
+      "gpu_result_summary": {},
+      "model": "Biren106M",
+      "node_name": "cluster-cim2-minion-0-2",
+      "result": "Undetected",
+      "vendor": "BIREN"
+    },
+    {
+      "diag_exec_errmsg": "GPU is occupied",
+      "diag_fail_count": 1,
+      "gpuUUID": "NB4B42MA049",
+      "gpu_result_summary": {},
+      "model": "Biren106M",
+      "node_name": "cluster-cim2-minion-0-2",
+      "result": "Undetected",
+      "vendor": "BIREN"
+    },
+    {
+      "diag_exec_errmsg": "GPU is occupied",
+      "diag_fail_count": 1,
+      "gpuUUID": "NB4B42M4069",
+      "gpu_result_summary": {},
+      "model": "Biren106M",
+      "node_name": "cluster-cim2-minion-0-2",
+      "result": "Undetected",
+      "vendor": "BIREN"
+    },
+    {
+      "diag_exec_errmsg": "GPU is occupied",
+      "diag_fail_count": 1,
+      "gpuUUID": "NB4B44LL041",
+      "gpu_result_summary": {},
+      "model": "Biren106M",
+      "node_name": "cluster-cim2-minion-0-3",
+      "result": "Undetected",
+      "vendor": "BIREN"
+    },
+    {
+      "diag_exec_errmsg": "GPU is occupied",
+      "diag_fail_count": 1,
+      "gpuUUID": "NB4B45ML078",
+      "gpu_result_summary": {},
+      "model": "Biren106M",
+      "node_name": "cluster-cim2-minion-0-3",
+      "result": "Undetected",
+      "vendor": "BIREN"
+    },
+    {
+      "diag_exec_errmsg": "GPU is occupied",
+      "diag_fail_count": 1,
+      "gpuUUID": "NB4B45MP053",
+      "gpu_result_summary": {},
+      "model": "Biren106M",
+      "node_name": "cluster-cim2-minion-0-3",
+      "result": "Undetected",
+      "vendor": "BIREN"
+    },
+    {
+      "diag_exec_errmsg": "GPU is occupied",
+      "diag_fail_count": 1,
+      "gpuUUID": "NB4B45M3079",
+      "gpu_result_summary": {},
+      "model": "Biren106M",
+      "node_name": "cluster-cim2-minion-3-0",
+      "result": "Undetected",
+      "vendor": "BIREN"
+    },
+    {
+      "diag_exec_errmsg": "GPU is occupied",
+      "diag_fail_count": 1,
+      "gpuUUID": "NB4B42M8054",
+      "gpu_result_summary": {},
+      "model": "Biren106M",
+      "node_name": "cluster-cim2-minion-0-2",
+      "result": "Undetected",
+      "vendor": "BIREN"
+    },
+    {
+      "diag_exec_errmsg": "GPU is occupied",
+      "diag_fail_count": 1,
+      "gpuUUID": "NB4B44LC072",
+      "gpu_result_summary": {},
+      "model": "Biren106M",
+      "node_name": "cluster-cim2-minion-0-2",
+      "result": "Undetected",
+      "vendor": "BIREN"
+    },
+    {
+      "diag_exec_errmsg": "GPU is occupied",
+      "diag_fail_count": 1,
+      "gpuUUID": "NB4B44LS072",
+      "gpu_result_summary": {},
+      "model": "Biren106M",
+      "node_name": "cluster-cim2-minion-0-3",
+      "result": "Undetected",
+      "vendor": "BIREN"
+    },
+    {
+      "diag_exec_errmsg": "GPU is occupied",
+      "diag_fail_count": 1,
+      "gpuUUID": "NB4B44LD056",
+      "gpu_result_summary": {},
+      "model": "Biren106M",
+      "node_name": "cluster-cim2-minion-0-2",
+      "result": "Undetected",
+      "vendor": "BIREN"
+    }
+  ],
+  "diag_total_count": 1,
+  "inspect_type": "GPU",
+  "status": "running",
+  "task_result_summary": {
+    "totalCards": 40,
+    "totalChecks": 23,
+    "totalUsed": 17
+  }
+}
+### Create rdma inspection task
+POST {{host}}/opapi/wsm/v1/apts/rdma/submit HTTP/1.1
+
+{
+  "testScene": "singleNode",
+  "bandWidthThreshold": 0,
+  "nodeList": [
+    "cluster-cim2-minion-0-1"
+  ]
+}
+### Delete rdma inspection task
+POST {{host}}/opapi/wsm/v1/apts/rdma/stop HTTP/1.1
+### Get rdma inspection result
+GET {{host}}/opapi/wsm/v1/apts/rdma/querybandwidth HTTP/1.1
+
+
+# Response:
+{
+  "testRdmaResultList": [
+    {
+      "localNodeName": "cluster-cim2-minion-0-1",
+      "localRdmaInterface": "mlx5_12",
+      "localNetDev": "ens5f0",
+      "localPci": "0000:9d:00.0",
+      "localLinkSpeed": "200 Gb/s",
+      "remoteNodeName": "cluster-cim2-minion-0-1",
+      "remoteRdmaInterface": "mlx5_4",
+      "remoteNetDev": "ens1f0",
+      "remotePci": "0000:1b:00.0",
+      "remoteLinkSpeed": "200 Gb/s",
+      "testResult": "pass",
+      "errInfo": "",
+      "errInfoZh": "",
+      "bandWidth": 195.11
+    },
+    {
+      "localNodeName": "cluster-cim2-minion-0-1",
+      "localRdmaInterface": "mlx5_13",
+      "localNetDev": "ens5f1",
+      "localPci": "0000:9d:00.1",
+      "localLinkSpeed": "200 Gb/s",
+      "remoteNodeName": "cluster-cim2-minion-0-1",
+      "remoteRdmaInterface": "mlx5_12",
+      "remoteNetDev": "ens5f0",
+      "remotePci": "0000:9d:00.0",
+      "remoteLinkSpeed": "200 Gb/s",
+      "testResult": "pass",
+      "errInfo": "",
+      "errInfoZh": "",
+      "bandWidth": 195.11
+    },
+    {
+      "localNodeName": "cluster-cim2-minion-0-1",
+      "localRdmaInterface": "mlx5_16",
+      "localNetDev": "ens7f0",
+      "localPci": "0000:bd:00.0",
+      "localLinkSpeed": "200 Gb/s",
+      "remoteNodeName": "cluster-cim2-minion-0-1",
+      "remoteRdmaInterface": "mlx5_5",
+      "remoteNetDev": "ens1f1",
+      "remotePci": "0000:1b:00.1",
+      "remoteLinkSpeed": "200 Gb/s",
+      "testResult": "running",
+      "errInfo": "",
+      "errInfoZh": "",
+      "bandWidth": 0
+    },
+    {
+      "localNodeName": "cluster-cim2-minion-0-1",
+      "localRdmaInterface": "mlx5_17",
+      "localNetDev": "ens7f1",
+      "localPci": "0000:bd:00.1",
+      "localLinkSpeed": "200 Gb/s",
+      "remoteNodeName": "cluster-cim2-minion-0-1",
+      "remoteRdmaInterface": "mlx5_8",
+      "remoteNetDev": "ens3f0",
+      "remotePci": "0000:3d:00.0",
+      "remoteLinkSpeed": "200 Gb/s",
+      "testResult": "pass",
+      "errInfo": "",
+      "errInfoZh": "",
+      "bandWidth": 195.11
+    },
+    {
+      "localNodeName": "cluster-cim2-minion-0-1",
+      "localRdmaInterface": "mlx5_4",
+      "localNetDev": "ens1f0",
+      "localPci": "0000:1b:00.0",
+      "localLinkSpeed": "200 Gb/s",
+      "remoteNodeName": "cluster-cim2-minion-0-1",
+      "remoteRdmaInterface": "mlx5_17",
+      "remoteNetDev": "ens7f1",
+      "remotePci": "0000:bd:00.1",
+      "remoteLinkSpeed": "200 Gb/s",
+      "testResult": "pass",
+      "errInfo": "",
+      "errInfoZh": "",
+      "bandWidth": 192.77
+    },
+    {
+      "localNodeName": "cluster-cim2-minion-0-1",
+      "localRdmaInterface": "mlx5_5",
+      "localNetDev": "ens1f1",
+      "localPci": "0000:1b:00.1",
+      "localLinkSpeed": "200 Gb/s",
+      "remoteNodeName": "cluster-cim2-minion-0-1",
+      "remoteRdmaInterface": "mlx5_9",
+      "remoteNetDev": "ens3f1",
+      "remotePci": "0000:3d:00.1",
+      "remoteLinkSpeed": "200 Gb/s",
+      "testResult": "uninstall",
+      "errInfo": "",
+      "errInfoZh": "",
+      "bandWidth": 0
+    },
+    {
+      "localNodeName": "cluster-cim2-minion-0-1",
+      "localRdmaInterface": "mlx5_8",
+      "localNetDev": "ens3f0",
+      "localPci": "0000:3d:00.0",
+      "localLinkSpeed": "200 Gb/s",
+      "remoteNodeName": "cluster-cim2-minion-0-1",
+      "remoteRdmaInterface": "mlx5_16",
+      "remoteNetDev": "ens7f0",
+      "remotePci": "0000:bd:00.0",
+      "remoteLinkSpeed": "200 Gb/s",
+      "testResult": "pass",
+      "errInfo": "",
+      "errInfoZh": "",
+      "bandWidth": 195.11
+    },
+    {
+      "localNodeName": "cluster-cim2-minion-0-1",
+      "localRdmaInterface": "mlx5_9",
+      "localNetDev": "ens3f1",
+      "localPci": "0000:3d:00.1",
+      "localLinkSpeed": "200 Gb/s",
+      "remoteNodeName": "cluster-cim2-minion-0-1",
+      "remoteRdmaInterface": "mlx5_13",
+      "remoteNetDev": "ens5f1",
+      "remotePci": "0000:9d:00.1",
+      "remoteLinkSpeed": "200 Gb/s",
+      "testResult": "pass",
+      "errInfo": "",
+      "errInfoZh": "",
+      "bandWidth": 191.73
+    }
+  ],
+  "testScene": "singleNode",
+  "status": "running",
+  "testNodeNum": 1,
+  "testRdmaNum": 8,
+  "bandWidthThreshold": 0
+}
+### Create sccl inspection task
+POST {{host}}/opapi/wsm/v1/apts/scclinspection/start HTTP/1.1
+
+{
+  "inspectType": "BRCCL",
+  "cclType": "AllReduce",
+  "command": "-G 1 -b 512 -e 20m",
+  "gpuPerNode": 8,
+  "nodeList": [
+    "cluster-cim2-minion-0-1"
+  ],
+  "testScene": "cluster",
+  "outAlgbw": 0,
+  "outBusbw": 0,
+  "inAlgbw": 0,
+  "inBusbw": 0
+}
+### Delete sccl inspection task
+POST {{host}}/opapi/wsm/v1/apts/scclinspection/stop HTTP/1.1
+### Get sccl inspection result
+GET {{host}}/opapi/wsm/v1/apts/scclinspection/query HTTP/1.1
+
+
+# Response:
+{
+  "scclResult": {
+    "data": {},
+    "result": {
+      "passNodeNum": 0,
+      "failNodeNum": 0,
+      "failNodeList": null
+    }
+  },
+  "gpuNum": 8,
+  "nodeNum": 1,
+  "status": "finished",
+  "cclType": "AllReduce",
+  "testScene": "cluster",
+  "result": "pass",
+  "inAlgbw": 37.7,
+  "inBusbw": 65.98,
+  "outAlgbw": 25.34,
+  "outBusbw": 44.34
+}
+### Create model inspection task
+POST {{host}}/opapi/wsm/v1/apts/modelinspection HTTP/1.1
+
+{
+  "gpuFactory": "biren",
+  "testScene": "node",
+  "gpuTotal": 0,
+  "datasetName": "wudao2",
+  "pvc": "llama70b",
+  "nodeList": [
+    "cluster-cim2-minion-0-1"
+  ],
+  "cpuPerNode": 100,
+  "gpuPerNode": 8,
+  "memoryPerNode": 1500,
+  "superParam": "{\"env\":[{\"TP_SIZE\":\"8\",\"PP_SIZE\":\"1\",\"MICRO_BATCH_SIZE\":\"2\",\"GLOBAL_BATCH_SIZE\":\"512\",\"NLAYERS\":\"10\",\"STOP_AT\":\"5\"}]}"
+}
+### Delete model inspection task
+# @prompt name
+DELETE {{host}}/opapi/wsm/v1/apts/modelinspection/stop/{{name}} HTTP/1.1
+### Delete model inspection result
+# @prompt name
+DELETE {{host}}/opapi/wsm/v1/apts/modelinspection/delete/{{name}} HTTP/1.1
+### Get model inspection result
+GET {{host}}/opapi/wsm/v1/apts/modelinspection HTTP/1.1
+### Get vcjob
+# @prompt namespace
+# @prompt name
+# @prompt vcjobId
+GET {{host}}/opapi/wsm/v1/apts/vcjobevents/{{namespace}}/{{name}}?vcjobId={{vcjobId}} HTTP/1.1
+### Update fault demarcation config
+POST {{host}}/api/configcenter-configserver/v1/editItems HTTP/1.1
+
+[
+  {
+    "key": "resource-faultanala-switch",
+    "groupId": "vcjob-faultanalaswitch-config",
+    "value": "true"
+  }
+]
+### Get fault demarcation config
+GET {{host}}/api/configcenter-configserver/v241006/getItems?groupId=vcjob-faultanalaswitch-config HTTP/1.1
+### Update namespace config
+POST {{host}}/opapi/wsm/v1/apts/namespace HTTP/1.1
+
+{
+  "nameSpace": "test70b"
+}
+### Get namespace config
+GET {{host}}/opapi/wsm/v1/apts/namespace HTTP/1.1
+### Update ccl inspection config
+POST {{host}}/opapi/wsm/v1/apts/clrdmainspectionconfig HTTP/1.1
+
+{
+  "clRdmaInspectionImageName": "swr:2512/admin/image/scclinspection:v7.24.40.03"
+}
+### Get ccl inspection config
+GET {{host}}/opapi/wsm/v1/apts/clrdmainspectionconfig HTTP/1.1
+### Update model inspection config
+POST {{host}}/opapi/wsm/v1/apts/modelinspectionconfig HTTP/1.1
+
+{
+  "modelName": "llama70b",
+  "modelImageName": "swr:2512/admin/image/birensupa-pytorch-llama2_70b:v7.24.40.06",
+  "codePath": "/workspace/megatron-lm",
+  "generalShellPath": "megatron_br_adaptor/examples/llama2_v2/llama2-70b/TP8/pretrain_llama2_70b_MB2_GB128.sh",
+  "perfOptShellPath": "megatron_br_adaptor/examples/llama2_v2/llama2-70b/TP8/pretrain_llama2_70b_MB2_GB128_interleaved1f1b.sh",
+  "firstStepTimeout": 60,
+  "nonFirstStepTimeout": 15,
+}
+### Get model inspection config
+GET {{host}}/opapi/wsm/v1/apts/modelinspectionconfig HTTP/1.1
+### Create dataset
+POST {{host}}/opapi/wsm/v1/apts/datasets HTTP/1.1
+Content-Type: application/zip
+
+file=@/home/pict/ntq/wudao.zip
+### Bind dataset
+POST {{host}}/opapi/wsm/v1/apts/dataset/bind HTTP/1.1
+
+{
+  "datasetFileName": "wudao.tar.gz",
+  "datasetName": "wudao1",
+  "pvc": "llama70b77",
+  "isShareStorage": true,
+  "namespace": "test70b"
+}
+### Unbind dataset
+# @prompt name
+POST {{host}}/opapi/wsm/v1/apts/dataset/unbind/{{name}} HTTP/1.1
+### Delete dataset
+# @prompt name
+POST {{host}}/opapi/wsm/v1/apts/dataset/{{name}} HTTP/1.1
+### Get datasets
+GET {{host}}/opapi/wsm/v1/apts/datasets HTTP/1.1

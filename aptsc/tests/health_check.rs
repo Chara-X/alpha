@@ -1,39 +1,31 @@
 use aptsc::msg;
 use reqwest::blocking::Client;
-use std::error;
+use std::{env, error};
 #[test]
 fn test() -> Result<(), Box<dyn error::Error>> {
     // Prepare the request payload
-    let request_payload = msg::HealthCheckRequest {
-        object: "test_object".to_string(),
+    let req = msg::HealthCheckRequest {
+        object: "cluster".to_string(),
         check_sub_info: msg::CheckSubInfo {
-            gpu_consistency_check: Some(vec!["check1".to_string()]),
-            rdma_consistency_check: Some(vec!["check2".to_string()]),
-            gpu_availability_check: Some(vec!["check3".to_string()]),
-            rdma_availability_check: Some(vec!["check4".to_string()]),
+            gpu_consistency_check: Some(vec![msg::GpuConsistencyCheck::GpuHardDropNum]),
+            rdma_consistency_check: Some(vec![msg::RdmaConsistencyCheck::RdmaPortNum]),
         },
-        health_check_cfg: msg::HealthCheckCfg {
+        health_check_cfg: msg::HealthCheckConfig {
             rdma_nums: 2,
             gpu_nums: 4,
         },
     };
-    // Make the HTTP request
-    let url = "https://example.com/api/healthcheck"; // Replace with the actual URL
     let client = Client::new();
-    let response = client
-        .post(url)
-        .json(&request_payload) // Automatically serialize to JSON
-        .send();
-    // Check if the request was successful
-    assert!(response.is_ok(), "Request failed");
-    let response = response?.error_for_status()?;
-    // Automatically deserialize the response payload
-    let health_check_response: msg::HealthCheckResponse = response.json()?;
+    let res: msg::HealthCheckResponse = client
+        .post(env::var("APTS_ADDR").unwrap())
+        .json(&req) // Automatically serialize to JSON
+        .send()?
+        .json()?;
     // Verify the deserialized response
     assert_eq!(
-        health_check_response.status, "Success",
+        res.status, "Success",
         "Health check status is not 'Success'"
     );
-    println!("Health check response: {:?}", health_check_response);
+    println!("Health check response: {:?}", res);
     Ok(())
 }
