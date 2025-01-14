@@ -116,7 +116,6 @@ DELETE {{host}}/opapi/wsm/v1/apts/gpuinspectiontask HTTP/1.1
 ### Get gpu inspection result
 GET {{host}}/opapi/wsm/v1/apts/gpuinspectiontask HTTP/1.1
 
-
 # Response:
 {
   "diag_created": "2025-01-14T16:20:10+08:00",
@@ -131,166 +130,6 @@ GET {{host}}/opapi/wsm/v1/apts/gpuinspectiontask HTTP/1.1
       "result": "Undetected",
       "vendor": "BIREN"
     },
-    {
-      "diag_exec_errmsg": "GPU is occupied",
-      "diag_fail_count": 1,
-      "gpuUUID": "NB4B44L6041",
-      "gpu_result_summary": {},
-      "model": "Biren106M",
-      "node_name": "cluster-cim2-minion-0-3",
-      "result": "Undetected",
-      "vendor": "BIREN"
-    },
-    {
-      "diag_exec_errmsg": "GPU is occupied",
-      "diag_fail_count": 1,
-      "gpuUUID": "NB4B44LT063",
-      "gpu_result_summary": {},
-      "model": "Biren106M",
-      "node_name": "cluster-cim2-minion-0-3",
-      "result": "Undetected",
-      "vendor": "BIREN"
-    },
-    {
-      "diag_exec_errmsg": "GPU is occupied",
-      "diag_fail_count": 1,
-      "gpuUUID": "NB4B45MD050",
-      "gpu_result_summary": {},
-      "model": "Biren106M",
-      "node_name": "cluster-cim2-minion-0-3",
-      "result": "Undetected",
-      "vendor": "BIREN"
-    },
-    {
-      "diag_exec_errmsg": "GPU is occupied",
-      "diag_fail_count": 1,
-      "gpuUUID": "NB4B42LU066",
-      "gpu_result_summary": {},
-      "model": "Biren106M",
-      "node_name": "cluster-cim2-minion-0-2",
-      "result": "Undetected",
-      "vendor": "BIREN"
-    },
-    {
-      "diag_exec_errmsg": "GPU is occupied",
-      "diag_fail_count": 1,
-      "gpuUUID": "NB4B44LD067",
-      "gpu_result_summary": {},
-      "model": "Biren106M",
-      "node_name": "cluster-cim2-minion-0-2",
-      "result": "Undetected",
-      "vendor": "BIREN"
-    },
-    {
-      "diag_exec_errmsg": "GPU is occupied",
-      "diag_fail_count": 1,
-      "gpuUUID": "NB4B42LF069",
-      "gpu_result_summary": {},
-      "model": "Biren106M",
-      "node_name": "cluster-cim2-minion-0-2",
-      "result": "Undetected",
-      "vendor": "BIREN"
-    },
-    {
-      "diag_exec_errmsg": "GPU is occupied",
-      "diag_fail_count": 1,
-      "gpuUUID": "NB4B42MA049",
-      "gpu_result_summary": {},
-      "model": "Biren106M",
-      "node_name": "cluster-cim2-minion-0-2",
-      "result": "Undetected",
-      "vendor": "BIREN"
-    },
-    {
-      "diag_exec_errmsg": "GPU is occupied",
-      "diag_fail_count": 1,
-      "gpuUUID": "NB4B42M4069",
-      "gpu_result_summary": {},
-      "model": "Biren106M",
-      "node_name": "cluster-cim2-minion-0-2",
-      "result": "Undetected",
-      "vendor": "BIREN"
-    },
-    {
-      "diag_exec_errmsg": "GPU is occupied",
-      "diag_fail_count": 1,
-      "gpuUUID": "NB4B44LL041",
-      "gpu_result_summary": {},
-      "model": "Biren106M",
-      "node_name": "cluster-cim2-minion-0-3",
-      "result": "Undetected",
-      "vendor": "BIREN"
-    },
-    {
-      "diag_exec_errmsg": "GPU is occupied",
-      "diag_fail_count": 1,
-      "gpuUUID": "NB4B45ML078",
-      "gpu_result_summary": {},
-      "model": "Biren106M",
-      "node_name": "cluster-cim2-minion-0-3",
-      "result": "Undetected",
-      "vendor": "BIREN"
-    },
-    {
-      "diag_exec_errmsg": "GPU is occupied",
-      "diag_fail_count": 1,
-      "gpuUUID": "NB4B45MP053",
-      "gpu_result_summary": {},
-      "model": "Biren106M",
-      "node_name": "cluster-cim2-minion-0-3",
-      "result": "Undetected",
-      "vendor": "BIREN"
-    },
-    {
-      "diag_exec_errmsg": "GPU is occupied",
-      "diag_fail_count": 1,
-      "gpuUUID": "NB4B45M3079",
-      "gpu_result_summary": {},
-      "model": "Biren106M",
-      "node_name": "cluster-cim2-minion-3-0",
-      "result": "Undetected",
-      "vendor": "BIREN"
-    },
-    {
-      "diag_exec_errmsg": "GPU is occupied",
-      "diag_fail_count": 1,
-      "gpuUUID": "NB4B42M8054",
-      "gpu_result_summary": {},
-      "model": "Biren106M",
-      "node_name": "cluster-cim2-minion-0-2",
-      "result": "Undetected",
-      "vendor": "BIREN"
-    },
-    {
-      "diag_exec_errmsg": "GPU is occupied",
-      "diag_fail_count": 1,
-      "gpuUUID": "NB4B44LC072",
-      "gpu_result_summary": {},
-      "model": "Biren106M",
-      "node_name": "cluster-cim2-minion-0-2",
-      "result": "Undetected",
-      "vendor": "BIREN"
-    },
-    {
-      "diag_exec_errmsg": "GPU is occupied",
-      "diag_fail_count": 1,
-      "gpuUUID": "NB4B44LS072",
-      "gpu_result_summary": {},
-      "model": "Biren106M",
-      "node_name": "cluster-cim2-minion-0-3",
-      "result": "Undetected",
-      "vendor": "BIREN"
-    },
-    {
-      "diag_exec_errmsg": "GPU is occupied",
-      "diag_fail_count": 1,
-      "gpuUUID": "NB4B44LD056",
-      "gpu_result_summary": {},
-      "model": "Biren106M",
-      "node_name": "cluster-cim2-minion-0-2",
-      "result": "Undetected",
-      "vendor": "BIREN"
-    }
   ],
   "diag_total_count": 1,
   "inspect_type": "GPU",
@@ -594,3 +433,5 @@ POST {{host}}/opapi/wsm/v1/apts/dataset/unbind/{{name}} HTTP/1.1
 POST {{host}}/opapi/wsm/v1/apts/dataset/{{name}} HTTP/1.1
 ### Get datasets
 GET {{host}}/opapi/wsm/v1/apts/datasets HTTP/1.1
+### Baidu
+GET https://baidu.com HTTP/1.1

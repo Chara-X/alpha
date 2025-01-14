@@ -18,6 +18,15 @@ struct User {
 struct Address {
     city: String,
 }
+/**
+```http
+POST {{addr}}/opapi/wsm/v1/apts/namespace HTTP/1.1
+
+{
+    "nameSpace": "test70b"
+}
+```
+*/
 fn main() {
     println!("{}", env::current_exe().unwrap().display());
 }

@@ -108,19 +108,14 @@ paths:
                     properties:
                       vendor:
                         type: string
-                        example: biren
                       diag_param:
                         type: string
-                        example: ""
                       diag_level:
                         type: string
-                        example: short
                 inspect_count:
                   type: integer
-                  example: 1
                 inspect_type:
                   type: string
-                  example: GPU
       responses:
         "201":
           description: GPU inspection task created successfully.
@@ -144,7 +139,6 @@ paths:
                   diag_created:
                     type: string
                     format: date-time
-                    example: "2025-01-14T16:20:10+08:00"
                   diag_gpu_outputs:
                     type: array
                     items:
@@ -152,16 +146,12 @@ paths:
                       properties:
                         diag_exec_errmsg:
                           type: string
-                          example: "GPU is occupied"
                         gpuUUID:
                           type: string
-                          example: NB4B44LQ069
                         result:
                           type: string
-                          example: Undetected
                         vendor:
                           type: string
-                          example: BIREN
   /opapi/wsm/v1/apts/scclinspection/start:
     post:
       summary: Create SCCL inspection task
