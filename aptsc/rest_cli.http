@@ -1,8 +1,6 @@
-@hostname = https://10.166.209.110
-@port = 443
-@host = {{hostname}}:{{port}}
+@srv = https://10.166.209.110
 ### Create health check task
-POST {{host}}/opapi/wsm/v1/apts/healthcheck HTTP/1.1
+POST {{srv}}/opapi/wsm/v1/apts/healthcheck HTTP/1.1
 
 {
   "object": "cluster",
@@ -20,7 +18,7 @@ POST {{host}}/opapi/wsm/v1/apts/healthcheck HTTP/1.1
   }
 }
 ### Get health check parameter
-GET {{host}}/opapi/wsm/v1/apts/healthcheckcfg HTTP/1.1
+GET {{srv}}/opapi/wsm/v1/apts/healthcheckcfg HTTP/1.1
 
 
 # Response:
@@ -66,7 +64,7 @@ GET {{host}}/opapi/wsm/v1/apts/healthcheckcfg HTTP/1.1
 }
 
 ### Get health check result
-GET {{host}}/opapi/wsm/v1/apts/healthcheck HTTP/1.1
+GET {{srv}}/opapi/wsm/v1/apts/healthcheck HTTP/1.1
 
 
 # Response:
@@ -96,7 +94,7 @@ GET {{host}}/opapi/wsm/v1/apts/healthcheck HTTP/1.1
   "storeNum": null
 }
 ### Create gpu inspection task
-POST {{host}}/opapi/wsm/v1/apts/gpuinspectiontask HTTP/1.1
+POST {{srv}}/opapi/wsm/v1/apts/gpuinspectiontask HTTP/1.1
 
 {
   "diag_configs": [
@@ -112,9 +110,9 @@ POST {{host}}/opapi/wsm/v1/apts/gpuinspectiontask HTTP/1.1
   "notes": []
 }
 ### Delete gpu inspection task
-DELETE {{host}}/opapi/wsm/v1/apts/gpuinspectiontask HTTP/1.1
+DELETE {{srv}}/opapi/wsm/v1/apts/gpuinspectiontask HTTP/1.1
 ### Get gpu inspection result
-GET {{host}}/opapi/wsm/v1/apts/gpuinspectiontask HTTP/1.1
+GET {{srv}}/opapi/wsm/v1/apts/gpuinspectiontask HTTP/1.1
 
 # Response:
 {
@@ -141,7 +139,7 @@ GET {{host}}/opapi/wsm/v1/apts/gpuinspectiontask HTTP/1.1
   }
 }
 ### Create rdma inspection task
-POST {{host}}/opapi/wsm/v1/apts/rdma/submit HTTP/1.1
+POST {{srv}}/opapi/wsm/v1/apts/rdma/submit HTTP/1.1
 
 {
   "testScene": "singleNode",
@@ -151,9 +149,9 @@ POST {{host}}/opapi/wsm/v1/apts/rdma/submit HTTP/1.1
   ]
 }
 ### Delete rdma inspection task
-POST {{host}}/opapi/wsm/v1/apts/rdma/stop HTTP/1.1
+POST {{srv}}/opapi/wsm/v1/apts/rdma/stop HTTP/1.1
 ### Get rdma inspection result
-GET {{host}}/opapi/wsm/v1/apts/rdma/querybandwidth HTTP/1.1
+GET {{srv}}/opapi/wsm/v1/apts/rdma/querybandwidth HTTP/1.1
 
 
 # Response:
@@ -295,7 +293,7 @@ GET {{host}}/opapi/wsm/v1/apts/rdma/querybandwidth HTTP/1.1
   "bandWidthThreshold": 0
 }
 ### Create sccl inspection task
-POST {{host}}/opapi/wsm/v1/apts/scclinspection/start HTTP/1.1
+POST {{srv}}/opapi/wsm/v1/apts/scclinspection/start HTTP/1.1
 
 {
   "inspectType": "BRCCL",
@@ -312,9 +310,9 @@ POST {{host}}/opapi/wsm/v1/apts/scclinspection/start HTTP/1.1
   "inBusbw": 0
 }
 ### Delete sccl inspection task
-POST {{host}}/opapi/wsm/v1/apts/scclinspection/stop HTTP/1.1
+POST {{srv}}/opapi/wsm/v1/apts/scclinspection/stop HTTP/1.1
 ### Get sccl inspection result
-GET {{host}}/opapi/wsm/v1/apts/scclinspection/query HTTP/1.1
+GET {{srv}}/opapi/wsm/v1/apts/scclinspection/query HTTP/1.1
 
 
 # Response:
@@ -339,7 +337,7 @@ GET {{host}}/opapi/wsm/v1/apts/scclinspection/query HTTP/1.1
   "outBusbw": 44.34
 }
 ### Create model inspection task
-POST {{host}}/opapi/wsm/v1/apts/modelinspection HTTP/1.1
+POST {{srv}}/opapi/wsm/v1/apts/modelinspection HTTP/1.1
 
 {
   "gpuFactory": "biren",
@@ -357,19 +355,19 @@ POST {{host}}/opapi/wsm/v1/apts/modelinspection HTTP/1.1
 }
 ### Delete model inspection task
 # @prompt name
-DELETE {{host}}/opapi/wsm/v1/apts/modelinspection/stop/{{name}} HTTP/1.1
+DELETE {{srv}}/opapi/wsm/v1/apts/modelinspection/stop/{{name}} HTTP/1.1
 ### Delete model inspection result
 # @prompt name
-DELETE {{host}}/opapi/wsm/v1/apts/modelinspection/delete/{{name}} HTTP/1.1
+DELETE {{srv}}/opapi/wsm/v1/apts/modelinspection/delete/{{name}} HTTP/1.1
 ### Get model inspection result
-GET {{host}}/opapi/wsm/v1/apts/modelinspection HTTP/1.1
+GET {{srv}}/opapi/wsm/v1/apts/modelinspection HTTP/1.1
 ### Get vcjob
 # @prompt namespace
 # @prompt name
 # @prompt vcjobId
-GET {{host}}/opapi/wsm/v1/apts/vcjobevents/{{namespace}}/{{name}}?vcjobId={{vcjobId}} HTTP/1.1
+GET {{srv}}/opapi/wsm/v1/apts/vcjobevents/{{namespace}}/{{name}}?vcjobId={{vcjobId}} HTTP/1.1
 ### Update fault demarcation config
-POST {{host}}/api/configcenter-configserver/v1/editItems HTTP/1.1
+POST {{srv}}/api/configcenter-configserver/v1/editItems HTTP/1.1
 
 [
   {
@@ -379,25 +377,25 @@ POST {{host}}/api/configcenter-configserver/v1/editItems HTTP/1.1
   }
 ]
 ### Get fault demarcation config
-GET {{host}}/api/configcenter-configserver/v241006/getItems?groupId=vcjob-faultanalaswitch-config HTTP/1.1
+GET {{srv}}/api/configcenter-configserver/v241006/getItems?groupId=vcjob-faultanalaswitch-config HTTP/1.1
 ### Update namespace config
-POST {{host}}/opapi/wsm/v1/apts/namespace HTTP/1.1
+POST {{srv}}/opapi/wsm/v1/apts/namespace HTTP/1.1
 
 {
   "nameSpace": "test70b"
 }
 ### Get namespace config
-GET {{host}}/opapi/wsm/v1/apts/namespace HTTP/1.1
+GET {{srv}}/opapi/wsm/v1/apts/namespace HTTP/1.1
 ### Update ccl inspection config
-POST {{host}}/opapi/wsm/v1/apts/clrdmainspectionconfig HTTP/1.1
+POST {{srv}}/opapi/wsm/v1/apts/clrdmainspectionconfig HTTP/1.1
 
 {
   "clRdmaInspectionImageName": "swr:2512/admin/image/scclinspection:v7.24.40.03"
 }
 ### Get ccl inspection config
-GET {{host}}/opapi/wsm/v1/apts/clrdmainspectionconfig HTTP/1.1
+GET {{srv}}/opapi/wsm/v1/apts/clrdmainspectionconfig HTTP/1.1
 ### Update model inspection config
-POST {{host}}/opapi/wsm/v1/apts/modelinspectionconfig HTTP/1.1
+POST {{srv}}/opapi/wsm/v1/apts/modelinspectionconfig HTTP/1.1
 
 {
   "modelName": "llama70b",
@@ -409,14 +407,14 @@ POST {{host}}/opapi/wsm/v1/apts/modelinspectionconfig HTTP/1.1
   "nonFirstStepTimeout": 15,
 }
 ### Get model inspection config
-GET {{host}}/opapi/wsm/v1/apts/modelinspectionconfig HTTP/1.1
+GET {{srv}}/opapi/wsm/v1/apts/modelinspectionconfig HTTP/1.1
 ### Create dataset
-POST {{host}}/opapi/wsm/v1/apts/datasets HTTP/1.1
+POST {{srv}}/opapi/wsm/v1/apts/datasets HTTP/1.1
 Content-Type: application/zip
 
 file=@/home/pict/ntq/wudao.zip
 ### Bind dataset
-POST {{host}}/opapi/wsm/v1/apts/dataset/bind HTTP/1.1
+POST {{srv}}/opapi/wsm/v1/apts/dataset/bind HTTP/1.1
 
 {
   "datasetFileName": "wudao.tar.gz",
@@ -427,11 +425,11 @@ POST {{host}}/opapi/wsm/v1/apts/dataset/bind HTTP/1.1
 }
 ### Unbind dataset
 # @prompt name
-POST {{host}}/opapi/wsm/v1/apts/dataset/unbind/{{name}} HTTP/1.1
+POST {{srv}}/opapi/wsm/v1/apts/dataset/unbind/{{name}} HTTP/1.1
 ### Delete dataset
 # @prompt name
-POST {{host}}/opapi/wsm/v1/apts/dataset/{{name}} HTTP/1.1
+POST {{srv}}/opapi/wsm/v1/apts/dataset/{{name}} HTTP/1.1
 ### Get datasets
-GET {{host}}/opapi/wsm/v1/apts/datasets HTTP/1.1
+GET {{srv}}/opapi/wsm/v1/apts/datasets HTTP/1.1
 ### Baidu
 GET https://baidu.com HTTP/1.1
