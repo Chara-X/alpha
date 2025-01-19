@@ -2,7 +2,6 @@ package main
 
 import (
 	"embed"
-	"testing"
 )
 
 // content holds our static web server content.
@@ -11,7 +10,6 @@ import (
 var content embed.FS
 
 func main() {
-	testing.CoverMode()
 }
 func Add() {
 
