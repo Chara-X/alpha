@@ -1,9 +1,9 @@
 import "@typespec/http";
 using TypeSpec.Http;
 @service({
-  title: "Pet Store",
+  title: "APTS OpenAPI Docs",
 })
-@server("https://example.com", "Single server endpoint")
+@server("https://10.166.209.110", "OpenPalette cluster-cim2")
 namespace PetStore;
 @doc("""
   Get status info for the service.
