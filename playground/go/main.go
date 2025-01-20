@@ -1,13 +1,15 @@
 package main
 
 import (
-	_ "embed"
-	"fmt"
+	"embed"
 )
 
-//go:embed main.go
-var s string
+// content holds our static web server content.
+//
+//go:embed cmd/* example/* "main.go"
+var content embed.FS
 
 func main() {
-	fmt.Println(s)
+}
+func Add() {
 }
