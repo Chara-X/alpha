@@ -366,6 +366,10 @@ GET {{srv}}/opapi/wsm/v1/apts/modelinspection HTTP/1.1
 # @prompt name
 # @prompt vcjobId
 GET {{srv}}/opapi/wsm/v1/apts/vcjobevents/{{namespace}}/{{name}}?vcjobId={{vcjobId}} HTTP/1.1
+### Get vcjob
+GET {{srv}}/opapi/wsm/v1/apts/vcjobevents/icf-test/inp11383760862082840005
+### Get vcjobs
+GET {{srv}}/api/v1.0/pvrm/vcjobs
 ### Update fault demarcation config
 POST {{srv}}/api/configcenter-configserver/v1/editItems HTTP/1.1
 

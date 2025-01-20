@@ -1,11 +1,13 @@
 package main
 
-import "testing"
+import (
+	_ "embed"
+	"fmt"
+)
 
-// [io.Copy]
+//go:embed main.go
+var s string
+
 func main() {
-	testing.CoverMode()
-}
-func Add() {
-
+	fmt.Println(s)
 }
