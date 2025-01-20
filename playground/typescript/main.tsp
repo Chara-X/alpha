@@ -5,15 +5,26 @@ using TypeSpec.Http;
 })
 @server("https://10.166.209.110", "OpenPalette cluster-cim2")
 namespace PetStore;
-@doc("""
-  Get status info for the service.
-  The status includes the current version of the service.
-  The status value may be one of:
-  - `ok`: the service is operating normally
-  - `degraded`: the service is operating in a degraded state
-  - `down`: the service is not operating
-  """)
-@tag("Status")
-@route("/status")
-@get
-op status(): string;
+/**
+ * @returns 123123123123123123123123123123123
+ */
+@get op read(@path id: string): {
+  /** the widget */
+  @body
+  widget: Widget;
+
+  @header xRateLimitRemaining: numeric;
+  @header xRateLimitReset: numeric;
+} | {
+  @statusCode _: 404;
+
+  @body
+  error: string;
+};
+model Widget {
+  /** the widget id */
+  id: string;
+
+  /** the widget name */
+  name: string;
+}
