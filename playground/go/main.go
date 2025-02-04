@@ -1,24 +1,17 @@
 package main
 
-import "fmt"
-
 //go:generate stringer -type=User
 type User struct {
 	ID   int
 	Name string
 }
-type Pill int
-
-const (
-	Placebo Pill = iota
-	Aspirin
-	Ibuprofen
-	Paracetamol
-	Acetaminophen = Paracetamol
-)
+type Foo struct {
+	me *Foo
+}
 
 func main() {
-	fmt.Println(Aspirin)
+	var f = Foo{}
+	f.me = &f
 }
 func Div(x, y int) int {
 	return x / y
