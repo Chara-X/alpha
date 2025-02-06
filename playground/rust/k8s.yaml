@@ -1,0 +1,20 @@
+apiVersion: v1
+clusters:
+  - cluster:
+      certificate-authority: /etc/kubernetes/certs/ca.crt
+      server: https://127.0.0.1:6443
+    name: cluster-DT
+contexts:
+  - context:
+      cluster: cluster-DT
+      namespace: default
+      user: kubectl
+    name: kubectl-to-cluster-DT
+current-context: kubectl-to-cluster-DT
+kind: Config
+preferences: {}
+users:
+  - name: kubectl
+    user:
+      client-certificate: /etc/kubernetes/certs/kubectl.crt
+      client-key: /etc/kubernetes/certs/kubectl.key
